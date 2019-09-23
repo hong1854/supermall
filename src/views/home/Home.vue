@@ -3,13 +3,14 @@
     <navbar class="home-nav">
       <div slot="centent">购物街</div>
     </navbar>
-    <Scroll class="content">
+    <Scroll class="content" ref="scroll" :probeType='3' @scroll="contentScroll">
       <HomeSwiper :banner="banner"></HomeSwiper>
       <RecommendView :recommends="recommend"></RecommendView>
       <FeatureView></FeatureView>
       <TabControl :title="['流行','新款','精选']" class="tab-control" @tabclick="tabclick"></TabControl>
       <GoodsList :goods="showGoods"></GoodsList>
     </Scroll>
+    <BackTop @click.native="backclick" v-show="isshow"/>
   </div>
 </template>
 <script>
@@ -21,6 +22,7 @@ import navbar from "components/common/navbar/NavBar";
 import TabControl from "components/content/tabControl/TabControl";
 import GoodsList from "components/content/goods/GoodsList";
 import Scroll from "components/common/scroll/Scroll";
+import BackTop from 'components/content/backTop/BackTop'
 
 import { getHomeMultidata, getHomeGoods } from "network/home";
 
@@ -34,7 +36,8 @@ export default {
         new: { page: 0, list: [] },
         sell: { page: 0, list: [] }
       },
-      currentType: "pop"
+      currentType: "pop",
+      isshow:false,
     };
   },
   computed: {
@@ -49,7 +52,8 @@ export default {
     FeatureView,
     TabControl,
     GoodsList,
-    Scroll
+    Scroll,
+    BackTop,
   },
   created() {
     this.getHomeMultidata();
@@ -73,6 +77,13 @@ export default {
           this.currentType = "sell";
       }
     },
+    backclick(){
+      this.$refs.scroll.scrollTo(0,0,500)
+    },
+    contentScroll(position){
+      this.isshow=-(position.y)>1000
+      
+    },
     /**
      * 网络请求相关的方法
      **/
@@ -88,7 +99,8 @@ export default {
         this.goods[type].list.push(...res.data.list);
         this.goods[type].page += 1;
       });
-    }
+    },
+    
   }
 };
 </script>
