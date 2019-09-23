@@ -5,7 +5,7 @@
       class="tab-control-item"
       :class="{active:i===currentIndex}"
       @click="itemclick(i)"
-    >
+    :key="item.title">
       <span>{{item}}</span>
     </div>
   </div>
@@ -20,6 +20,7 @@ export default {
   methods: {
     itemclick(i) {
       this.currentIndex = i;
+      this.$emit('tabclick',i)
     }
   },
   props: {
