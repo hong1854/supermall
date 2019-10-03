@@ -6,36 +6,53 @@
   </div>
 </template>
 <script>
-import BScroll from 'better-scroll'
+import BScroll from "better-scroll";
 export default {
-  data(){
+  data() {
     return {
-      scroll:null,
-    }
+      scroll: null
+    };
   },
-  mounted(){
-    this.scroll = new BScroll(this.$refs.wrapper,{
-      click:true,
-      probeType:this.probeType,
+  mounted() {
+    this.scroll = new BScroll(this.$refs.wrapper, {
+      click: true,
+      probeType: this.probeType,
+      pullUpLoad: this.pullUpLoad
+    });
+    this.scroll.on("scroll", position => {
+      this.$emit("scroll", position);
+    });
+    this.scroll.on('pullingUp',()=>{
+      this.$emit('pullingUp')
+      
     })
-    this.scroll.on('scroll',(position)=>{
-      this.$emit('scroll',position)
-    })
   },
-  methods:{
-    scrollTo(x,y,time=300){
-      this.scroll.scrollTo(x,y,time)
+  methods: {
+    scrollTo(x, y, time = 300) {
+      this.scroll.scrollTo(x, y, time);
+    },
+    finisPullup(){
+      this.scroll.finishPullUp()
+    },
+    refresh(){
+      
+      this.scroll.refresh()
+    },
+    getScrollY(){
+      return this.scroll ? this.scroll.y:0
+    },
+  },
+  props: {
+    probeType: {
+      type: Number,
+      default: 0
+    },
+    pullUpLoad: {
+      type: Boolean,
+      default: false
     }
-  },
-  props:{
-    probeType:{
-      type:Number,
-      default:0,
-    }
-  },
-
-}
+  }
+};
 </script>
-<style>
-  
+<style scoped>
 </style>
