@@ -27,6 +27,6 @@ export default {
 <style>
   .swiperItem{
     height:300px;
-    
+    overflow: hidden;
   }
 </style>

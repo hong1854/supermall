@@ -46,8 +46,11 @@ import BackTop from "components/content/backTop/BackTop";
 
 import { getHomeMultidata, getHomeGoods } from "network/home";
 import { debounce } from "common/utils/utils";
+import {itemListenerMixin ,backToMixin} from 'common/mixin'
+import { log } from 'util';
 
 export default {
+  mixins:[itemListenerMixin,backToMixin],
   data() {
     return {
       banner: [],
@@ -58,7 +61,6 @@ export default {
         sell: { page: 0, list: [] }
       },
       currentType: "pop",
-      isshow: false,
       tabOffsetTop: 0,
       isTabFiex: false,
       saveY:0,
@@ -88,11 +90,7 @@ export default {
     this.getHomeGoods("sell");
     //监听ITEM中图片加载完成
   },
-  mounted() {
-    this.$bus.$on("itemImageLoad", () => {
-      debounce(this.$refs.scroll.refresh, 50);
-    });
-  },
+  
   activated(){
     this.$refs.scroll.scrollTo(0,this.saveY,0)
     this.$refs.scroll.refresh()
@@ -117,10 +115,6 @@ export default {
       }
       this.$refs.tabControl1.currentIndex=i;
       this.$refs.tabControl.currentIndex=i;
-    },
-
-    backclick() {
-      this.$refs.scroll.scrollTo(0, 0, 500);
     },
     contentScroll(position) {
       //判断BackTop是否显示

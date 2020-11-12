@@ -22,25 +22,23 @@ export default {
     this.scroll.on("scroll", position => {
       this.$emit("scroll", position);
     });
-    this.scroll.on('pullingUp',()=>{
-      this.$emit('pullingUp')
-      
-    })
+    this.scroll.on("pullingUp", () => {
+      this.$emit("pullingUp");
+    });
   },
   methods: {
-    scrollTo(x, y, time = 300) {
+    scrollTo(x, y, time) {
       this.scroll.scrollTo(x, y, time);
     },
-    finisPullup(){
-      this.scroll.finishPullUp()
+    finisPullup() {
+      this.scroll.finishPullUp();
     },
-    refresh(){
-      
-      this.scroll.refresh()
+    refresh() {
+      this.scroll.refresh();
     },
-    getScrollY(){
-      return this.scroll ? this.scroll.y:0
-    },
+    getScrollY() {
+      return this.scroll.y? this.scroll.y : 0;
+    }
   },
   props: {
     probeType: {

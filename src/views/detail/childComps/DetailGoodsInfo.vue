@@ -32,8 +32,8 @@ export default {
   },
   methods: {
     imgLoad() {
-      if (++this.cunter === this.imgesLength) {
-        this.$emit("imgeLoad");
+      if (++this.counter === this.imgesLength) {
+        this.$emit("imgeLoad");  
       }
     }
   },

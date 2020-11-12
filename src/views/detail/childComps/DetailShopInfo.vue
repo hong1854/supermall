@@ -38,6 +38,15 @@ export default {
     shop:{
       type:Object
     }
+  },
+  filters:{
+    sellCountFilter(value){
+      let result=value;
+      if(value>10000){
+        result =(result/10000).toFixed(1)+'万'
+      }
+      return result
+    }
   }
 };
 </script>
@@ -112,13 +121,17 @@ export default {
   background-color: #f13e3a;
 }
 .shop-bottom{
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  border-radius: 5px;
-  width:80px;
+  margin-top: 10px;
   text-align: center;
 }
 .enter-shop{
-  height:25px;
-  line-height: 25px;
+  display: inline-block;
+  font-size:14px;
+  background-color: #f2f5f8;
+  width:150px;
+  height:30px;
+  text-align: center;
+  line-height:30px;
+  border-radius: 10px;
 }
 </style>

@@ -8,14 +8,21 @@ export function getDetail(iid){
     }
   })
 }
+export function getRecommend(){
+  return request({
+    url:'/api/v1/recommend',
+  })
+}
 
 export class GoodsInfo{
   constructor(itemInfo,columns,services){
     this.title=itemInfo.title
     this.desc=itemInfo.desc
+    this.lowNowPrice=itemInfo.lowNowPrice
     this.newPrice=itemInfo.price
     this.oldPrice=itemInfo.oldPrice
     this.discoint=itemInfo.discountDesc
+    this.discountBgColor=itemInfo.discountBgColor
     this.columns=columns
     this.services=services
     this.realPrice=itemInfo.lowNowPrice
@@ -28,7 +35,7 @@ export class Shop {
     this.fans=shopInfo.cFans;
     this.sells=shopInfo.cSells;
     this.score=shopInfo.score;
-    this.goodsCount=shopInfo.cGodds
+    this.goodsCount=shopInfo.cGoods
   }
 }
 export class GoodsParam{

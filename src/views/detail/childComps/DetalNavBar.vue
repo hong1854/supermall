@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavBar>
+    <NavBar class="nvabar">
       <div slot="left" class="back" @click="backclick">
         <img src="~assets/img/common/back.svg" alt="">
       </div>
@@ -24,7 +24,8 @@ export default {
   },
   methods:{
     itemClick(i){
-      this.currentIndex=i
+      this.currentIndex=i,
+      this.$emit('itemClick',i)
     },
     backclick(){
       this.$router.go(-1)
@@ -33,8 +34,13 @@ export default {
 }
 </script>
 <style scoped>
+.nvabar{
+  position: relative;
+  z-index:9;
+}
   .title{
     display: flex;
+    padding:0 10px;
   }
   .title-item{
     flex:1;
